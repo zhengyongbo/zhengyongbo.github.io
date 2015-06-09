@@ -1,0 +1,13 @@
+@mixin even-bg-color($color1,$color2){
+	background-color: $color2;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($color1), to($color2));
+	background-image: -webkit-linear-gradient(top, $color1 0, $color2 100%);
+	background-image: -o-linear-gradient(top, $color1 0, $color2 100%);
+	background-image: linear-gradient(to bottom, $color1 0, $color2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2', GradientType=0);
+	background-repeat: repeat-x;
+}
+
+@mixin odd-bg-color($color){
+	background-color: $color;
+}

@@ -1,0 +1,29 @@
+---
+layout: default
+title : Archive
+fa: "fa fa-archive"
+---
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="archive-header text-center">
+                <h1>Uncle Zheng's posts</h1>
+            </div>
+            <div class="timeline">
+                {% for p in site.posts %}
+                    <div class="t-view shadow-z-1" data-tv-type="{{p.type}}">
+                        <div class="tv-header media">
+                            <div class="tvh-title">{{ p.title }}</div class="tvh-title">
+                            <div class="tvh-date"><i class="fa fa-clock-o"></i>{{ p.date | date_to_string }}</div>
+                        </div>
+                        <div class="tv-body">
+                            <p class="tvb-summary">{{ p.content | strip_html | strip_newlines | truncate: 250 }}</p>
+                            <a class="btn btn-sm btn-success btn-raised" href="{{ p.url}}">View more</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+.my-list.list-group {
+	.list-group-item {
+		padding: 20px 50px;
+
+		&:nth-of-type(odd) {
+			background-color: $nth-odd-bg;
+
+			&:hover {
+				background-color: $nth-odd-hover;
+			}
+		}
+		&:nth-of-type(even) {
+			background-color: $nth-even-bg;
+
+			&:hover {
+				background-color: $nth-even-hover;
+			}
+		}
+		.row-content {
+			width: 100%;
+
+			.least-content {
+				top: 35px;
+				font-size: 12px;
+				right: 20px;
+				color: $light-grey;
+				i{
+					font-size: 14px;
+  					padding-right: 5px;
+				}
+			}
+		}
+		.list-group-item-heading {
+			// font-size: 30px;
+			// line-height: 50px;
+
+			a {
+				color: rgba(0, 0, 0, .77);
+			}
+		}
+	}
+	.list-group-separator {
+		margin-top: 20px;
+		margin-bottom: 20px;
+
+		&:before {
+			width: 100%;
+		}
+	}
+	.list-group-item-text {
+		line-height: 2;
+		color: $odd-text-color;
+	}
+}

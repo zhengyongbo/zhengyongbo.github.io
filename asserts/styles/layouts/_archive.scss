@@ -1,0 +1,22 @@
+.post-list {
+	&>h2,&>h3{
+		padding-left: 20px;
+	}
+
+	&>h2{
+		color:#4CAF50;
+	}
+
+	&>h3{
+		color:#009688;
+	}
+
+	.timeline{
+		padding-top: 10px;
+		padding-bottom:10px;
+	}
+
+	.t-view .tv-header {
+		border-bottom: none;
+	}
+}

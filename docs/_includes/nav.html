@@ -1,0 +1,33 @@
+<nav class="nav-wrapper">
+    <div class="my-nav">
+        <h1 class="logo">
+            <a href="#">Uncle <span>Zheng</span></a>
+        </h1>
+        <div class="nav-wrap">
+            <nav class="main-nav" role="navigation">
+                <ul class="unstyled list-hover-slide">
+                    {% if page.title == "Home" %}
+                       {% assign active = "active" %}
+                    {% else %}
+                        {% assign active = "" %}
+                    {% endif %}
+                    <li><a href="/" class="{{ active }}"><i class="fa fa-home"></i>Home</a></li>
+                    {% for node in site.html_pages %} 
+                      {% if node.title != null and node.title != "Home" %}
+                        {% if node.url == page.url %}
+                          {% assign active = "active" %}
+                        {% else %}
+                          {% assign active = "" %}
+                        {% endif %}
+                        <li ><a href="{{ node.url }}" class="{{ active }}"><i class="{{ node.fa }}"></i>{{ node.title }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    <li><a href="/feed.xml" target="_blank"><i class="fa fa-rss"></i>RSS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</nav>
+<div class="toggle-nav">
+    <div class="toggle-icon"></div>
+</div>

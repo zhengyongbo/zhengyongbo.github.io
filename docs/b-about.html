@@ -1,0 +1,112 @@
+---
+layout: default
+title: About
+fa: "fa fa-user"
+---
+<div id="fullpage">
+    <div class="section">
+        <div id="timeline-embed"></div>
+    </div>
+    <div class="section">
+        <div class='container'>
+            <h1 class="letter-close text-center" style="margin-bottom: 40px;">My Web Development Skills</h1>
+            <div class='row'>
+                <div class='col-sm-12 col-md-6'>
+                    <figure>
+                        <canvas height='450' id='my-skill1' width='450'></canvas>
+                        <figcaption>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class='col-sm-12 col-md-6'>
+                    <figure>
+                        <canvas height='450' id='my-skill2' width='450'></canvas>
+                        <figcaption>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section" id="section3">
+    	<div class="clouds"></div>
+		<div class="sky">
+		  <div class="instructions shadow-z-1">Click the rocket body to see my info.</div>
+		  <div class="rocket-container">
+		    <div class="rocket">
+		      <div class="rocket-top">
+		      </div>
+		      <div class="rocket-body">
+		        <div class="window">
+		          <!-- <img class="profile-picture" src="" /> -->
+		        </div>
+		      </div>
+		      <div class="rocket-bottom">
+		        <div class="rocket-thruster">
+		          <div class="rocket-burner">
+		            <div class="flame red"></div>
+		            <div class="flame orange"></div>
+		            <div class="flame white"></div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="details">
+		      <span class="close">x</span>
+		      <div class="title">Contact me</div>
+		      <div class="about-me">
+		        <div class="bgtint"></div>
+				<section class="bussinesscard">
+						<div class="flip">
+							<div class="front">				
+								<div class="top">				
+									<div class="logo"><span class="fat">U</span><span class="skinny">Z</span></div>				
+								</div>
+								<div class="nametroduction">
+									<div class="name">{{ site.author.name }}</div>
+									<div class="introduction">Developer && Designer</div>
+								</div>	
+								<div class="form-horizontal contact">						
+									<div class="form-group">
+										<div class="col-lg-2 text-right">
+											<i class="fa fa-qq qq"></i>
+										</div>
+										<div class="col-lg-10">
+											<a href="#">{{ site.author.qq }}</a>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-2 text-right">
+											<i class="fa fa-facebook"></i>
+										</div>
+										<div class="col-lg-10">
+											<a href="{{ site.author.facebook }}">@zhengyongbo</a> 
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-2 text-right">
+											<i class="fa fa-mobile"></i>
+										</div>
+										<div class="col-lg-10">
+											<a href="#">{{ site.author.phone }}</a> 
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-2 text-right">
+											<i class="fa fa-paper-plane email"></i>
+										</div>
+										<div class="col-lg-10">
+											<a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+										</div>
+									</div>
+								</div>						
+							</div>
+							<div class="back"></div> <!--FIXES FONT RENDERING -->
+						</div>
+					</section>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    </div>
+</div>

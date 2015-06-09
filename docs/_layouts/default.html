@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+
+<body>
+    <script type="text/javascript">
+    NProgress.start();
+    pageName = "{{ page.title }}"
+    </script>
+    <div id="loader">
+        <div id="shadow"></div>
+        <div id="box"></div>
+    </div>
+    {% include nav.html %}
+    <div id="wrap">
+         {{ content }}
+    </div>
+    {% include footer.html %}
+</body>
+
+</html>

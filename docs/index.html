@@ -1,0 +1,77 @@
+---
+layout: default
+title: Home
+---
+<div class="odd-container">
+    <div class="container">
+        <div class="row">
+            <div id="unclezheng" class="banner">
+                <h1>
+                    <a class="banner-title">Uncle Zheng</a>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="row panel profile-wrap">
+                    <div class="profile-header">
+                        <h2>Uncle Zheng</h2>
+                        <h3>Programmer</h3>
+                        <img src="/dist/images/avatar.png" class="profile-img">
+                    </div>
+                    <div class="profile-content">
+                        <h3>About me</h3>
+                        <p>Hey,I am Yongbo, a 28 years old frontend && backend dev from China. Feel free to follow me. </p>
+                        <div class="social">
+                            <ul>
+                                <li>
+                                    <a href="{{ site.author.facebook }}" target="_blank" class="zocial-facebook"><i class="fa fa-facebook fa-2x"></i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ site.author.github }}" target="_blank" class="zocial-github"> <i class="fa fa-github fa-2x"></i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ site.author.linkedin }}" target="_blank" class="zocial-linkedin"> <i class="fa fa-linkedin fa-2x"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9">
+                <div class="panel">
+                    <h1 class="row-heading text-center">My collections</h1>
+                    <div class="list-wrap">
+                        <div class="my-list list-group">
+                            {% for post in paginator.posts %}
+                            <div class="list-group-item">
+                                <div class="row-content">
+                                    <h4 class="list-group-item-heading">
+                                        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                                    </h4>
+                                    <p class="list-group-item-text">{{ post.content | strip_html | strip_newlines | truncate: 250 }}</p>
+                                    <div class="least-content"><i class="fa fa-clock-o"></i>{{ post.date | date_to_string }}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="pager-wrap">
+                        <!-- Pagination links -->
+                        <ul class="pager">
+                            {% if paginator.previous_page %}
+                            <li class="previous">
+                                <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">← Older</a>
+                            </li>
+                            {% else %} {% endif %} {% if paginator.next_page %}
+                            <li class="next">
+                                <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Newer →</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

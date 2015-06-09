@@ -1,0 +1,46 @@
+{
+    "timeline": {
+        "headline": "<div>My experience timeline</div>",
+        "type": "default",
+        "text": "<div>Web Developer && Designer</div>",
+        "asset": {
+            "media": "<div class='watch-wrap'><div id='watch'> <div class='digit'><span>1</span></div> <div class='digit'><span>2</span></div> <div class='digit'><span>3</span></div> <div class='digit'><span>4</span></div> <div class='digit'><span>5</span></div> <div class='digit'><span>6</span></div> <div class='digit'><span>7</span></div> <div class='digit'><span>8</span></div> <div class='digit'><span>9</span></div> <div class='digit'><span>10</span></div> <div class='digit'><span>11</span></div> <div class='digit'><span>12</span></div> <div id='mickey'></div> <div class='left' id='hours'></div> <div class='right' id='minutes'></div> </div></div>",
+            "credit": "",
+            "caption": ""
+        },
+        "startDate": "2006,1,1",
+        "date": [{
+            "startDate": "2006,6,1",
+            "headline": "<div>A brief introduction</div>",
+            "text": "<p>I'm a web developer.</p><p>I'm very intrested in web developing,both of frontend and backend.</p>",
+            "asset": {
+                "media": "/dist/images/brief-intro.png",
+                "credit": "",
+                "caption": ""
+            }
+        }, {
+            "startDate": "2006,9,1",
+            "endDate": "2010,6,1",
+            "headline": "<div><i class='fa fa-graduation-cap' style='padding-right:10px;'></i>My education experience</div>",
+            "text": "<p><b><i class='fa fa-university' style='padding-right:10px;'></i>Xiangtan University</b></p><p><i class='fa fa-trophy' style='padding-right:10px;'></i>Computer Science and Technology</p>",
+            "asset": {
+                "media": "/dist/images/xtu.png",
+                "credit": "",
+                "caption": ""
+            }
+        },
+        {
+            "startDate": "2010,7,1",
+            "endDate": "2011,6,1",
+            "headline": "<div><i class='fa fa-simplybuilt' style='padding-right:10px;'></i>My work experience</div>",
+            "text": "",
+            "asset": {
+                "media": "/dist/images/experience1.jpg",
+                "credit": "",
+                "caption": ""
+            }
+        }
+        ]
+
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "timeline": {
+        "headline": "<div><i class='fa fa-calendar' style='padding-right:10px;'></i>My experience timeline</div>",
+        "type": "default",
+        "text": "<div><i class='fa fa-user' style='padding-right:10px;'></i>Web Developer && Designer</div>",
+        "asset": {
+            "media": "/dist/images/time1.jpg",
+            "credit": "A timeline",
+            "caption": "How time flies!"
+        },
+        "startDate": "2006,1,1",
+        "date": [{
+            "startDate": "2006,6,1",
+            "headline": "<div><i class='fa fa-leanpub' style='padding-right:10px;'></i>A brief introduction</div>",
+            "text": "<p>I'm a web developer.</p><p>I'm very intrested in web developing,both of frontend and backend.</p>",
+            "asset": {
+                "media": "/dist/images/brief-intro.png",
+                "credit": "Programmer",
+                "caption": "Brief intro"
+            }
+        }, {
+            "startDate": "2006,9,1",
+            "endDate": "2010,6,1",
+            "headline": "<div><i class='fa fa-graduation-cap' style='padding-right:10px;'></i>My education experience</div>",
+            "text": "<p><b><i class='fa fa-university' style='padding-right:10px;'></i>Xiangtan University</b></p><p><i class='fa fa-trophy' style='padding-right:10px;'></i>Computer Science and Technology</p>",
+            "asset": {
+                "media": "/dist/images/xtu.png",
+                "credit": "XTU",
+                "caption": "Xiangtan University"
+            }
+        },
+        {
+            "startDate": "2010,7,1",
+            "endDate": "2011,6,1",
+            "headline": "<div><i class='fa fa-leaf' style='padding-right:10px;'></i>My work experience</div>",
+            "text": "",
+            "asset": {
+                "media": "/dist/images/experience2.jpg",
+                "credit": "My experience",
+                "caption": "Work experience"
+            }
+        }
+        ]
+
+    }
+}
