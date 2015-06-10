@@ -18,9 +18,8 @@ module.exports = function(grunt) {
 
     // Configurable paths
     var config = {
-        app: 'asserts',
-        dist: 'dist',
-        docs: 'docs'
+        app: '_asserts',
+        dist: 'dist'
     };
 
     // Define the configuration for all the tasks
@@ -119,8 +118,7 @@ module.exports = function(grunt) {
                     src: [
                         '.tmp',
                         '<%= config.dist %>/*',
-                        '!<%= config.dist %>/.git*',
-                        '<%= config.docs %>/dist/*'
+                        '!<%= config.dist %>/.git*'
                     ]
                 }]
             },
@@ -397,15 +395,6 @@ module.exports = function(grunt) {
                 cwd: '<%= config.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
-            },
-            docs: {
-                expand: true,
-                dot: true,
-                cwd: 'dist/',
-                src: [
-                    '**'
-                ],
-                dest: 'docs/dist/'
             }
         },
 
@@ -499,8 +488,7 @@ module.exports = function(grunt) {
         'concat:modernizr',
         // 'rev',
         'usemin',
-        'htmlmin',
-        'copy:docs'
+        'htmlmin'
     ]);
 
     grunt.registerTask('default', [

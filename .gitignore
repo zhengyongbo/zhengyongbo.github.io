@@ -1,7 +1,6 @@
 .sass-cache
 .tmp
-_gh_pages
 /bower_components
 /dist
 /node_modules
-
+/_site
