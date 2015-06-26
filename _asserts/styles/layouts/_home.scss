@@ -1,12 +1,7 @@
 .banner {
-	width: 100%;
 	position: relative;
-    text-align: center;
-    padding: 5% 0 20.7%;
-    margin-bottom: 5.8%;
-    height: 0px;
-    overflow: hidden!important;
-
+	text-align: center;
+	margin: 50px 0 0;
 	h1 {
 		width: 100%!important;
 		display: inline-block;
@@ -155,3 +150,107 @@ $blue: rgb(50,150,150);
 	background: #3F729B;
 	display: block;
 }
+
+#my-carousel {
+	margin-bottom: 0;	
+	.img-container{
+		-webkit-background-size: cover; 
+		-o-background-size: cover; 
+		background-size: cover;
+		background-position: 50% 50%;
+  		background-repeat: no-repeat;
+  		background-color:#000;
+	}
+	.layout{
+		background-color: rgba(0,0,0,.3); 
+	}
+}
+
+.inline-list1{
+	list-style: none;
+	li{
+		display: inline-block;
+		padding: 5px;
+	}
+
+	a{
+		color:
+	}
+}
+
+#fullpage-home{
+	#section1{
+		
+	}
+
+	.shadow{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,.5);
+		
+	}
+
+	.content{
+		text-align: center; 
+		color:#fff;
+		height: 100%;
+		padding-top:40px;
+		padding-bottom:60px;
+		position: relative;
+		
+		h3{
+			color:#C37B86;
+		}
+	}
+
+	.avatar{
+		width:100px;
+		height: 100px;
+	}
+
+	.profile-heading{
+		
+	}
+
+	.profile-body{
+		position: absolute;
+		top: 50%;
+		-webkit-transform: translatey(-50%);
+		-moz-transform: translatey(-50%);
+		-ms-transform: translatey(-50%);
+		transform: translatey(-50%);
+		width:100%;
+		text-align: center;
+	}
+
+	.profile-footer{
+		position: absolute;
+  		bottom: 60px;
+  		width:100%;
+  		text-align: center;
+	}
+
+	.links-list{
+		font-size: 16px;
+		a{
+			color:#7EDCF2;
+			&:hover{
+				color:#fff;
+			}
+		}
+	}
+
+	.social-list{
+		font-size: 16px;
+		a{
+			color: #EAE7FF;
+			&:hover{
+				color:#fff;
+			}
+		}
+	}
+}
+

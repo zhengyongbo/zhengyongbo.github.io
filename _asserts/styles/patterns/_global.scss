@@ -9,15 +9,15 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 	font-family: inherit;
 	font-weight: inherit;
 }
-#scrollTop {
+#fixed-actions {
 	position: fixed;
 	bottom: 10%;
 	right: 10px;
 	display: none;
 	font-size: 20px;	/* line-height: 30px; */
 	vertical-align: middle;
-	padding: 15px;
 	z-index:3;
+	padding: 8px 15px;
 }
 // @media (max-width:767px) {
 // 	.fork-github {

@@ -4,9 +4,9 @@ $(function() {
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
-            $('#scrollTop').fadeIn();
+            $('#fixed-actions').fadeIn();
         } else {
-            $('#scrollTop').fadeOut();
+            $('#fixed-actions').fadeOut();
         }
     });
 
@@ -20,7 +20,25 @@ $(function() {
     switch (pageName.toLocaleLowerCase()) {
         case "home":
             {
-                $('#unclezheng .banner-title').lettering().fitText(0.73);
+                $('#fullpage-home').fullpage({
+                    navigation: false,
+                    verticalCentered: false,
+                    afterResize:function(){
+                        $(".img-container").css("height",$("#section1").height());
+                    }
+                });
+                $('#my-carousel').slick({
+                    dots: false,
+                    arrows: false,
+                    autoplay:true,
+                    fade:true,
+                    autoplaySpeed:5000,
+                    lazyLoad: 'ondemand'
+                });
+
+                $(".img-container").css("height",$("#section1").height());
+
+                $('[data-toggle="tooltip"]').tooltip();
             };
             break;
         case "about":
@@ -156,6 +174,7 @@ $(function() {
                 $('.close').on('click', function() {
                     $('.sky').removeClass('show-details');
                 });
+                $('.rocket-body').popover('show');
             };
             break;
     }

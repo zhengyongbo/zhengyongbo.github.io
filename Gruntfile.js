@@ -380,7 +380,26 @@ module.exports = function(grunt) {
                         src: 'bower_components/font-awesome/fonts/*',
                         dest: '<%= config.dist %>/fonts/',
                         filter: 'isFile'
-                    },{
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '.',
+                        flatten: true,
+                        src: 'bower_components/slick-carousel/slick/fonts/*',
+                        dest: '<%= config.dist %>/styles/fonts/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '.',
+                        flatten: true,
+                        src: 'bower_components/slick-carousel/slick/ajax-loader.gif',
+                        dest: '<%= config.dist %>/styles/',
+                        filter: 'isFile'
+                    },
+                    {
                         expand: true,
                         dot: true,
                         cwd: 'bower_components/timeline.js/build/',
