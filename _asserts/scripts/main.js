@@ -38,7 +38,7 @@ $(function() {
 
                 $(".img-container").css("height",$("#section1").height());
 
-                $('[data-toggle="tooltip"]').tooltip();
+                $('[data-toggle="popover"]').popover();
             };
             break;
         case "about":
@@ -174,7 +174,7 @@ $(function() {
                 $('.close').on('click', function() {
                     $('.sky').removeClass('show-details');
                 });
-                $('.rocket-body').popover('show');
+                $('[data-toggle="popover"]').popover();
             };
             break;
     }

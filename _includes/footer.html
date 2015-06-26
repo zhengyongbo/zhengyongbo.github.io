@@ -1,10 +1,12 @@
-<a href="{{ site.author.github }}" class="fork-github" target="_blank"><img  src="/dist/images/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
-<div class="" id="fixed-actions">
-  <div class="btn-group-vertical">
-    <a href="/" class="btn btn-primary shadow-z-1 fa fa-home"></a>
-    <a href="#" id="scrollTop" class="btn btn-primary shadow-z-1 fa fa-angle-up"></a>
-  </div>
-</div>
+{% if page.title != "Home" %}
+	<a href="{{ site.author.github }}" class="fork-github" target="_blank"><img  src="/dist/images/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+	<div class="" id="fixed-actions">
+	  <div class="btn-group-vertical">
+	    <a href="/" class="btn btn-primary shadow-z-1 fa fa-home"></a>
+	    <a href="#" id="scrollTop" class="btn btn-primary shadow-z-1 fa fa-angle-up"></a>
+	  </div>
+	</div>
+{% endif %}
 <script type="text/javascript" src="{{ " /dist/scripts/vendor.js " | prepend: site.baseurl }}"></script>
 <script type="text/javascript" src="{{ " /dist/scripts/main.js " | prepend: site.baseurl }}"></script>
 {% if page.title == "About" %}
