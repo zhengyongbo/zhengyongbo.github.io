@@ -1,547 +1,561 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <title>认识时间</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "微软雅黑", Arial, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "微软雅黑", Arial, sans-serif;
+      }
 
-        /* 小朋友友好的活泼背景 */
-        body {
-            background-color: #fff5f8;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            touch-action: manipulation;
-        }
+      /* 小朋友友好的活泼背景 */
+      body {
+        background-color: #fff5f8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        touch-action: manipulation;
+      }
 
-        /* 标题样式 */
-        .title {
-            font-size: 44px;
-            color: #ff6b9d;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            text-align: center;
-        }
+      /* 标题样式 */
+      .title {
+        font-size: 44px;
+        color: #ff6b9d;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        text-align: center;
+      }
 
-        /* 钟表容器 */
-        .clock-container {
-            position: relative;
-            margin-bottom: 25px;
-        }
+      /* 钟表容器 */
+      .clock-container {
+        position: relative;
+        margin-bottom: 25px;
+      }
 
-        #clockCanvas {
-            border: 8px solid #ffd166;
-            border-radius: 50%;
-            background-color: white;
-            box-shadow: 0 0 25px rgba(255, 209, 102, 0.6);
-        }
+      #clockCanvas {
+        border: 8px solid #ffd166;
+        border-radius: 50%;
+        background-color: white;
+        box-shadow: 0 0 25px rgba(255, 209, 102, 0.6);
+      }
 
-        /* 时间输入区域 */
-        .input-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+      /* 时间输入区域 */
+      .input-area {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
 
-        .time-input {
-            width: 100px;
-            height: 60px;
-            border: 4px solid #4ecdc4;
-            border-radius: 15px;
-            font-size: 28px;
-            text-align: center;
-            outline: none;
-            color: #333;
-            background-color: #f0fcfb;
-        }
+      .time-input {
+        width: 100px;
+        height: 60px;
+        border: 4px solid #4ecdc4;
+        border-radius: 15px;
+        font-size: 28px;
+        text-align: center;
+        outline: none;
+        color: #333;
+        background-color: #f0fcfb;
+      }
 
-        .time-text {
-            font-size: 28px;
-            color: #ff6b9d;
-            font-weight: bold;
-        }
+      .time-text {
+        font-size: 28px;
+        color: #ff6b9d;
+        font-weight: bold;
+      }
 
-        /* 按钮区域 */
-        .btn-area {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
+      /* 按钮区域 */
+      .btn-area {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
 
-        .game-btn {
-            width: 140px;
-            height: 60px;
-            border: none;
-            border-radius: 20px;
-            font-size: 26px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
+      .game-btn {
+        width: 140px;
+        height: 60px;
+        border: none;
+        border-radius: 20px;
+        font-size: 26px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+      }
 
-        .game-btn:active {
-            transform: scale(0.95);
-        }
+      .game-btn:active {
+        transform: scale(0.95);
+      }
 
-        #startBtn {
-            background-color: #2ed573;
-        }
+      #startBtn {
+        background-color: #2ed573;
+      }
 
-        #submitBtn {
-            background-color: #1e90ff;
-        }
+      #submitBtn {
+        background-color: #1e90ff;
+      }
 
-        /* 虚拟数字键盘 */
-        #numberKeyboard {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffd166;
-            padding: 15px;
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            z-index: 100;
-        }
+      /* 虚拟数字键盘 */
+      #numberKeyboard {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffd166;
+        padding: 15px;
+        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        z-index: 100;
+      }
 
-        .key-btn {
-            height: 70px;
-            border: none;
-            border-radius: 15px;
-            font-size: 32px;
-            font-weight: bold;
-            background-color: white;
-            color: #ff6b9d;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-        }
+      .key-btn {
+        height: 70px;
+        border: none;
+        border-radius: 15px;
+        font-size: 32px;
+        font-weight: bold;
+        background-color: white;
+        color: #ff6b9d;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        .key-btn:active {
-            background-color: #f0f0f0;
-        }
+      .key-btn:active {
+        background-color: #f0f0f0;
+      }
 
-        /* 结果模态框 */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
-        }
+      /* 结果模态框 */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+      }
 
-        .modal-content {
-            width: 80%;
-            max-width: 400px;
-            background-color: white;
-            border-radius: 25px;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-        }
+      .modal-content {
+        width: 80%;
+        max-width: 400px;
+        background-color: white;
+        border-radius: 25px;
+        padding: 40px 20px;
+        text-align: center;
+        position: relative;
+      }
 
-        #fireworksCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 25px;
-            pointer-events: none;
-        }
+      #fireworksCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        pointer-events: none;
+      }
 
-        .modal-text {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            z-index: 10;
-            position: relative;
-        }
+      .modal-text {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        z-index: 10;
+        position: relative;
+      }
 
-        .correct-text {
-            color: #2ed573;
-        }
+      .correct-text {
+        color: #2ed573;
+      }
 
-        .wrong-text {
-            color: #ff3838;
-        }
+      .wrong-text {
+        color: #ff3838;
+      }
 
-        .close-btn {
-            width: 120px;
-            height: 50px;
-            border: none;
-            border-radius: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            background-color: #ff6b9d;
-            cursor: pointer;
-        }
+      .close-btn {
+        width: 120px;
+        height: 50px;
+        border: none;
+        border-radius: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        background-color: #ff6b9d;
+        cursor: pointer;
+      }
 
-        /* 新增：错误提示图片样式 */
-        #wrongImage {
-            max-width: 80%;
-            max-height: 150px;
-            margin: 15px 0;
-        }
+      /* 新增：错误提示图片样式 */
+      #wrongImage {
+        max-width: 80%;
+        max-height: 150px;
+        margin: 15px 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- 顶部标题 -->
     <h1 class="title">认识时间</h1>
 
     <!-- 钟表绘图区 -->
     <div class="clock-container">
-        <canvas id="clockCanvas" width="350" height="350"></canvas>
+      <canvas id="clockCanvas" width="350" height="350"></canvas>
     </div>
 
     <!-- 时间输入区 -->
     <div class="input-area">
-        <input type="text" class="time-input" id="hourInput" placeholder="时" maxlength="2">
-        <span class="time-text">时</span>
-        <input type="text" class="time-input" id="minuteInput" placeholder="分" maxlength="2">
-        <span class="time-text">分</span>
+      <input
+        type="text"
+        class="time-input"
+        id="hourInput"
+        placeholder="时"
+        maxlength="2"
+      />
+      <span class="time-text">时</span>
+      <input
+        type="text"
+        class="time-input"
+        id="minuteInput"
+        placeholder="分"
+        maxlength="2"
+      />
+      <span class="time-text">分</span>
     </div>
 
     <!-- 按钮区域 -->
     <div class="btn-area">
-        <button class="game-btn" id="startBtn">开始</button>
-        <button class="game-btn" id="submitBtn">提交</button>
+      <button class="game-btn" id="startBtn">开始</button>
+      <button class="game-btn" id="submitBtn">提交</button>
     </div>
 
     <!-- 虚拟数字键盘 -->
     <div id="numberKeyboard">
-        <button class="key-btn">1</button>
-        <button class="key-btn">2</button>
-        <button class="key-btn">3</button>
-        <button class="key-btn">4</button>
-        <button class="key-btn">5</button>
-        <button class="key-btn">6</button>
-        <button class="key-btn">7</button>
-        <button class="key-btn">8</button>
-        <button class="key-btn">9</button>
-        <button class="key-btn">0</button>
-        <button class="key-btn" id="delBtn">删</button>
-        <button class="key-btn" id="confirmBtn">确</button>
+      <button class="key-btn">1</button>
+      <button class="key-btn">2</button>
+      <button class="key-btn">3</button>
+      <button class="key-btn">4</button>
+      <button class="key-btn">5</button>
+      <button class="key-btn">6</button>
+      <button class="key-btn">7</button>
+      <button class="key-btn">8</button>
+      <button class="key-btn">9</button>
+      <button class="key-btn">0</button>
+      <button class="key-btn" id="delBtn">删</button>
+      <button class="key-btn" id="confirmBtn">确</button>
     </div>
 
     <!-- 结果模态框 -->
     <div class="modal" id="resultModal">
-        <div class="modal-content">
-            <canvas id="fireworksCanvas"></canvas>
-            <!-- 新增：正确答题音频 -->
-            <audio id="correctAudio" src="01.mp4" preload="auto"></audio>
-            <!-- 新增：错误答题图片 -->
-            <img id="wrongImage" src="02.png" style="display: none;">
-            <div class="modal-text" id="modalText"></div>
-            <button class="close-btn" id="closeModalBtn">确定</button>
-        </div>
+      <div class="modal-content">
+        <canvas id="fireworksCanvas"></canvas>
+        <!-- 新增：正确答题音频 -->
+        <!-- 新增：错误答题图片 -->
+        <div class="modal-text" id="modalText"></div>
+        <button class="close-btn" id="closeModalBtn">确定</button>
+      </div>
     </div>
 
     <script>
-        // 获取DOM元素
-        const clockCanvas = document.getElementById('clockCanvas');
-        const clockCtx = clockCanvas.getContext('2d');
-        const hourInput = document.getElementById('hourInput');
-        const minuteInput = document.getElementById('minuteInput');
-        const startBtn = document.getElementById('startBtn');
-        const submitBtn = document.getElementById('submitBtn');
-        const numberKeyboard = document.getElementById('numberKeyboard');
-        const resultModal = document.getElementById('resultModal');
-        const modalText = document.getElementById('modalText');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const fireworksCanvas = document.getElementById('fireworksCanvas');
-        const fireworksCtx = fireworksCanvas.getContext('2d');
-        const delBtn = document.getElementById('delBtn');
-        const confirmBtn = document.getElementById('confirmBtn');
-        // 新增：音频和图片元素
-        const correctAudio = document.getElementById('correctAudio');
-        const wrongImage = document.getElementById('wrongImage');
+      // 获取DOM元素
+      const clockCanvas = document.getElementById("clockCanvas");
+      const clockCtx = clockCanvas.getContext("2d");
+      const hourInput = document.getElementById("hourInput");
+      const minuteInput = document.getElementById("minuteInput");
+      const startBtn = document.getElementById("startBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const numberKeyboard = document.getElementById("numberKeyboard");
+      const resultModal = document.getElementById("resultModal");
+      const modalText = document.getElementById("modalText");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const fireworksCanvas = document.getElementById("fireworksCanvas");
+      const fireworksCtx = fireworksCanvas.getContext("2d");
+      const delBtn = document.getElementById("delBtn");
+      const confirmBtn = document.getElementById("confirmBtn");
+      // 新增：音频和图片元素
 
-        // 全局变量
-        let correctHour = 0;
-        let correctMinute = 0;
-        let currentInput = null;
-        let isGameStarted = false;
+      // 全局变量
+      let correctHour = 0;
+      let correctMinute = 0;
+      let currentInput = null;
+      let isGameStarted = false;
 
-        // 页面初始化
-        window.onload = function() {
-            drawInitialTip();
-            resizeCanvas();
-        };
+      // 页面初始化
+      window.onload = function () {
+        drawInitialTip();
+        resizeCanvas();
+      };
 
-        // 画布适配
-        function resizeCanvas() {
-            fireworksCanvas.width = document.querySelector('.modal-content').offsetWidth;
-            fireworksCanvas.height = document.querySelector('.modal-content').offsetHeight;
+      // 画布适配
+      function resizeCanvas() {
+        fireworksCanvas.width =
+          document.querySelector(".modal-content").offsetWidth;
+        fireworksCanvas.height =
+          document.querySelector(".modal-content").offsetHeight;
+      }
+
+      // 初始提示文字
+      function drawInitialTip() {
+        clockCtx.clearRect(0, 0, 350, 350);
+        clockCtx.fillStyle = "#ff6b9d";
+        clockCtx.font = "bold 24px 微软雅黑";
+        clockCtx.textAlign = "center";
+        clockCtx.textBaseline = "middle";
+        clockCtx.fillText("小朋友，点击下方[开始]按钮", 175, 165);
+        clockCtx.fillText("开始挑战吧!", 175, 205);
+      }
+
+      // 随机生成非整时、非半时时间
+      function randomTime() {
+        correctHour = Math.floor(Math.random() * 12) + 1;
+        do {
+          correctMinute = Math.floor(Math.random() * 60);
+        } while (correctMinute === 0 || correctMinute === 30);
+        drawClock(correctHour, correctMinute);
+      }
+
+      // 【核心升级】绘制专业钟表：1-12数字+60分钟小格+时针分针
+      function drawClock(hour, minute) {
+        const centerX = 175;
+        const centerY = 175;
+        const radius = 150;
+
+        // 清空画布
+        clockCtx.clearRect(0, 0, 350, 350);
+
+        // 1. 画表盘底色
+        clockCtx.beginPath();
+        clockCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        clockCtx.fillStyle = "white";
+        clockCtx.fill();
+        clockCtx.strokeStyle = "#ffd166";
+        clockCtx.lineWidth = 8;
+        clockCtx.stroke();
+
+        // 2. 画60个分钟小刻度（外部小格）
+        clockCtx.strokeStyle = "#cccccc";
+        clockCtx.lineWidth = 2;
+        for (let i = 0; i < 60; i++) {
+          const angle = (i * Math.PI) / 30;
+          clockCtx.beginPath();
+          clockCtx.moveTo(
+            centerX + Math.cos(angle) * (radius - 8),
+            centerY + Math.sin(angle) * (radius - 8),
+          );
+          clockCtx.lineTo(
+            centerX + Math.cos(angle) * radius,
+            centerY + Math.sin(angle) * radius,
+          );
+          clockCtx.stroke();
         }
 
-        // 初始提示文字
-        function drawInitialTip() {
-            clockCtx.clearRect(0, 0, 350, 350);
-            clockCtx.fillStyle = '#ff6b9d';
-            clockCtx.font = 'bold 24px 微软雅黑';
-            clockCtx.textAlign = 'center';
-            clockCtx.textBaseline = 'middle';
-            clockCtx.fillText('小朋友，点击下方[开始]按钮', 175, 165);
-            clockCtx.fillText('开始挑战吧!', 175, 205);
+        // 3. 画12个小时大刻度
+        clockCtx.strokeStyle = "#4ecdc4";
+        clockCtx.lineWidth = 5;
+        for (let i = 0; i < 12; i++) {
+          const angle = (i * Math.PI) / 6;
+          clockCtx.beginPath();
+          clockCtx.moveTo(
+            centerX + Math.cos(angle) * (radius - 15),
+            centerY + Math.sin(angle) * (radius - 15),
+          );
+          clockCtx.lineTo(
+            centerX + Math.cos(angle) * radius,
+            centerY + Math.sin(angle) * radius,
+          );
+          clockCtx.stroke();
         }
 
-        // 随机生成非整时、非半时时间
-        function randomTime() {
-            correctHour = Math.floor(Math.random() * 12) + 1;
-            do {
-                correctMinute = Math.floor(Math.random() * 60);
-            } while (correctMinute === 0 || correctMinute === 30);
-            drawClock(correctHour, correctMinute);
+        // 4. 绘制内部1-12数字
+        clockCtx.fillStyle = "#333";
+        clockCtx.font = "bold 28px 微软雅黑";
+        clockCtx.textAlign = "center";
+        clockCtx.textBaseline = "middle";
+        for (let i = 1; i <= 12; i++) {
+          const angle = (i * Math.PI) / 6 - Math.PI / 2;
+          const x = centerX + Math.cos(angle) * (radius - 35);
+          const y = centerY + Math.sin(angle) * (radius - 35);
+          clockCtx.fillText(i.toString(), x, y);
         }
 
-        // 【核心升级】绘制专业钟表：1-12数字+60分钟小格+时针分针
-        function drawClock(hour, minute) {
-            const centerX = 175;
-            const centerY = 175;
-            const radius = 150;
+        // 5. 计算指针角度
+        const minuteAngle = (minute * Math.PI) / 30 - Math.PI / 2;
+        const hourAngle =
+          ((hour % 12) * Math.PI) / 6 - Math.PI / 2 + (minute * Math.PI) / 360;
 
-            // 清空画布
-            clockCtx.clearRect(0, 0, 350, 350);
+        // 6. 画分针（长指针）
+        clockCtx.strokeStyle = "#1e90ff";
+        clockCtx.lineWidth = 6;
+        clockCtx.beginPath();
+        clockCtx.moveTo(centerX, centerY);
+        clockCtx.lineTo(
+          centerX + Math.cos(minuteAngle) * (radius - 40),
+          centerY + Math.sin(minuteAngle) * (radius - 40),
+        );
+        clockCtx.stroke();
 
-            // 1. 画表盘底色
-            clockCtx.beginPath();
-            clockCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-            clockCtx.fillStyle = 'white';
-            clockCtx.fill();
-            clockCtx.strokeStyle = '#ffd166';
-            clockCtx.lineWidth = 8;
-            clockCtx.stroke();
+        // 7. 画时针（短指针）
+        clockCtx.strokeStyle = "#ff6b9d";
+        clockCtx.lineWidth = 8;
+        clockCtx.beginPath();
+        clockCtx.moveTo(centerX, centerY);
+        clockCtx.lineTo(
+          centerX + Math.cos(hourAngle) * (radius - 70),
+          centerY + Math.sin(hourAngle) * (radius - 70),
+        );
+        clockCtx.stroke();
 
-            // 2. 画60个分钟小刻度（外部小格）
-            clockCtx.strokeStyle = '#cccccc';
-            clockCtx.lineWidth = 2;
-            for (let i = 0; i < 60; i++) {
-                const angle = (i * Math.PI) / 30;
-                clockCtx.beginPath();
-                clockCtx.moveTo(
-                    centerX + Math.cos(angle) * (radius - 8),
-                    centerY + Math.sin(angle) * (radius - 8)
-                );
-                clockCtx.lineTo(
-                    centerX + Math.cos(angle) * radius,
-                    centerY + Math.sin(angle) * radius
-                );
-                clockCtx.stroke();
+        // 8. 画中心圆点
+        clockCtx.beginPath();
+        clockCtx.arc(centerX, centerY, 10, 0, Math.PI * 2);
+        clockCtx.fillStyle = "#ffd166";
+        clockCtx.fill();
+      }
+
+      // 虚拟键盘逻辑
+      hourInput.addEventListener("click", () => {
+        if (!isGameStarted) return;
+        currentInput = hourInput;
+        numberKeyboard.style.display = "grid";
+      });
+
+      minuteInput.addEventListener("click", () => {
+        if (!isGameStarted) return;
+        currentInput = minuteInput;
+        numberKeyboard.style.display = "grid";
+      });
+
+      // 数字按键
+      document.querySelectorAll(".key-btn").forEach((btn) => {
+        if (btn !== delBtn && btn !== confirmBtn) {
+          btn.addEventListener("click", () => {
+            if (currentInput && currentInput.value.length < 2) {
+              currentInput.value += btn.textContent;
             }
+          });
+        }
+      });
 
-            // 3. 画12个小时大刻度
-            clockCtx.strokeStyle = '#4ecdc4';
-            clockCtx.lineWidth = 5;
-            for (let i = 0; i < 12; i++) {
-                const angle = (i * Math.PI) / 6;
-                clockCtx.beginPath();
-                clockCtx.moveTo(
-                    centerX + Math.cos(angle) * (radius - 15),
-                    centerY + Math.sin(angle) * (radius - 15)
-                );
-                clockCtx.lineTo(
-                    centerX + Math.cos(angle) * radius,
-                    centerY + Math.sin(angle) * radius
-                );
-                clockCtx.stroke();
-            }
+      // 删除键
+      delBtn.addEventListener("click", () => {
+        if (currentInput) currentInput.value = currentInput.value.slice(0, -1);
+      });
 
-            // 4. 绘制内部1-12数字
-            clockCtx.fillStyle = '#333';
-            clockCtx.font = 'bold 28px 微软雅黑';
-            clockCtx.textAlign = 'center';
-            clockCtx.textBaseline = 'middle';
-            for (let i = 1; i <= 12; i++) {
-                const angle = (i * Math.PI) / 6 - Math.PI / 2;
-                const x = centerX + Math.cos(angle) * (radius - 35);
-                const y = centerY + Math.sin(angle) * (radius - 35);
-                clockCtx.fillText(i.toString(), x, y);
-            }
+      // 确认隐藏键盘
+      confirmBtn.addEventListener("click", () => {
+        numberKeyboard.style.display = "none";
+        currentInput = null;
+      });
 
-            // 5. 计算指针角度
-            const minuteAngle = (minute * Math.PI) / 30 - Math.PI / 2;
-            const hourAngle = ((hour % 12) * Math.PI) / 6 - Math.PI / 2 + (minute * Math.PI) / 360;
+      // 开始按钮
+      startBtn.addEventListener("click", () => {
+        isGameStarted = true;
+        hourInput.value = "";
+        minuteInput.value = "";
+        randomTime();
+      });
 
-            // 6. 画分针（长指针）
-            clockCtx.strokeStyle = '#1e90ff';
-            clockCtx.lineWidth = 6;
-            clockCtx.beginPath();
-            clockCtx.moveTo(centerX, centerY);
-            clockCtx.lineTo(
-                centerX + Math.cos(minuteAngle) * (radius - 40),
-                centerY + Math.sin(minuteAngle) * (radius - 40)
-            );
-            clockCtx.stroke();
-
-            // 7. 画时针（短指针）
-            clockCtx.strokeStyle = '#ff6b9d';
-            clockCtx.lineWidth = 8;
-            clockCtx.beginPath();
-            clockCtx.moveTo(centerX, centerY);
-            clockCtx.lineTo(
-                centerX + Math.cos(hourAngle) * (radius - 70),
-                centerY + Math.sin(hourAngle) * (radius - 70)
-            );
-            clockCtx.stroke();
-
-            // 8. 画中心圆点
-            clockCtx.beginPath();
-            clockCtx.arc(centerX, centerY, 10, 0, Math.PI * 2);
-            clockCtx.fillStyle = '#ffd166';
-            clockCtx.fill();
+      // 提交按钮
+      submitBtn.addEventListener("click", () => {
+        if (!isGameStarted) {
+          alert("请先点击[开始]按钮开始挑战！");
+          return;
         }
 
-        // 虚拟键盘逻辑
-        hourInput.addEventListener('click', () => {
-            if (!isGameStarted) return;
-            currentInput = hourInput;
-            numberKeyboard.style.display = 'grid';
-        });
+        const userHour = parseInt(hourInput.value) || 0;
+        const userMinute = parseInt(minuteInput.value) || 0;
 
-        minuteInput.addEventListener('click', () => {
-            if (!isGameStarted) return;
-            currentInput = minuteInput;
-            numberKeyboard.style.display = 'grid';
-        });
+        // 重置音频和图片状态
 
-        // 数字按键
-        document.querySelectorAll('.key-btn').forEach(btn => {
-            if (btn !== delBtn && btn !== confirmBtn) {
-                btn.addEventListener('click', () => {
-                    if (currentInput && currentInput.value.length < 2) {
-                        currentInput.value += btn.textContent;
-                    }
-                });
-            }
-        });
-
-        // 删除键
-        delBtn.addEventListener('click', () => {
-            if (currentInput) currentInput.value = currentInput.value.slice(0, -1);
-        });
-
-        // 确认隐藏键盘
-        confirmBtn.addEventListener('click', () => {
-            numberKeyboard.style.display = 'none';
-            currentInput = null;
-        });
-
-        // 开始按钮
-        startBtn.addEventListener('click', () => {
-            isGameStarted = true;
-            hourInput.value = '';
-            minuteInput.value = '';
+        if (userHour === correctHour && userMinute === correctMinute) {
+          // 答对
+          modalText.className = "modal-text correct-text";
+          modalText.textContent = "恭喜你，答对了!";
+          resultModal.style.display = "flex";
+          drawFireworks();
+          // 播放正确音频
+          // 自动下一题（2秒后，与音频播放时长匹配）
+          setTimeout(() => {
+            resultModal.style.display = "none";
+            hourInput.value = "";
+            minuteInput.value = "";
             randomTime();
-        });
-
-        // 提交按钮
-        submitBtn.addEventListener('click', () => {
-            if (!isGameStarted) {
-                alert('请先点击[开始]按钮开始挑战！');
-                return;
-            }
-
-            const userHour = parseInt(hourInput.value) || 0;
-            const userMinute = parseInt(minuteInput.value) || 0;
-
-            // 重置音频和图片状态
-            correctAudio.pause();
-            correctAudio.currentTime = 0;
-            wrongImage.style.display = 'none';
-
-            if (userHour === correctHour && userMinute === correctMinute) {
-                // 答对
-                modalText.className = 'modal-text correct-text';
-                modalText.textContent = '恭喜你，答对了!';
-                resultModal.style.display = 'flex';
-                drawFireworks();
-                // 播放正确音频
-                correctAudio.play();
-                // 自动下一题（2秒后，与音频播放时长匹配）
-                setTimeout(() => {
-                    resultModal.style.display = 'none';
-                    correctAudio.pause(); // 停止音频
-                    correctAudio.currentTime = 0; // 重置音频进度
-                    hourInput.value = '';
-                    minuteInput.value = '';
-                    randomTime();
-                }, 2000);
-            } else {
-                // 答错
-                modalText.className = 'modal-text wrong-text';
-                modalText.textContent = '很遗憾，再想一想吧!';
-                // 显示错误图片
-                wrongImage.style.display = 'block';
-                resultModal.style.display = 'flex';
-                hourInput.value = '';
-                minuteInput.value = '';
-            }
-        });
-
-        // 关闭模态框
-        closeModalBtn.addEventListener('click', () => {
-            resultModal.style.display = 'none';
-            // 关闭时重置状态
-            correctAudio.pause();
-            correctAudio.currentTime = 0;
-            wrongImage.style.display = 'none';
-        });
-
-        // 礼花动画
-        function drawFireworks() {
-            fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-            let particles = [];
-            const colors = ['#ff6b9d', '#4ecdc4', '#ffd166', '#2ed573', '#1e90ff'];
-
-            // 创建粒子
-            for (let i = 0; i < 120; i++) {
-                particles.push({
-                    x: fireworksCanvas.width / 2,
-                    y: fireworksCanvas.height / 2,
-                    size: Math.random() * 5 + 2,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    speed: Math.random() * 6 + 3,
-                    angle: Math.random() * Math.PI * 2
-                });
-            }
-
-            // 动画循环
-            function animate() {
-                fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-                particles.forEach(p => {
-                    p.x += Math.cos(p.angle) * p.speed;
-                    p.y += Math.sin(p.angle) * p.speed;
-                    p.size *= 0.96;
-
-                    fireworksCtx.beginPath();
-                    fireworksCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    fireworksCtx.fillStyle = p.color;
-                    fireworksCtx.fill();
-                });
-
-                if (particles[0].size > 0.1) requestAnimationFrame(animate);
-            }
-            animate();
+          }, 2000);
+        } else {
+          // 答错
+          modalText.className = "modal-text wrong-text";
+          modalText.textContent = "很遗憾，再想一想吧!";
+          // 显示错误图片
+          resultModal.style.display = "flex";
+          hourInput.value = "";
+          minuteInput.value = "";
         }
+      });
+
+      // 关闭模态框
+      closeModalBtn.addEventListener("click", () => {
+        resultModal.style.display = "none";
+        // 关闭时重置状态
+      });
+
+      // 礼花动画
+      function drawFireworks() {
+        fireworksCtx.clearRect(
+          0,
+          0,
+          fireworksCanvas.width,
+          fireworksCanvas.height,
+        );
+        let particles = [];
+        const colors = ["#ff6b9d", "#4ecdc4", "#ffd166", "#2ed573", "#1e90ff"];
+
+        // 创建粒子
+        for (let i = 0; i < 120; i++) {
+          particles.push({
+            x: fireworksCanvas.width / 2,
+            y: fireworksCanvas.height / 2,
+            size: Math.random() * 5 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speed: Math.random() * 6 + 3,
+            angle: Math.random() * Math.PI * 2,
+          });
+        }
+
+        // 动画循环
+        function animate() {
+          fireworksCtx.clearRect(
+            0,
+            0,
+            fireworksCanvas.width,
+            fireworksCanvas.height,
+          );
+          particles.forEach((p) => {
+            p.x += Math.cos(p.angle) * p.speed;
+            p.y += Math.sin(p.angle) * p.speed;
+            p.size *= 0.96;
+
+            fireworksCtx.beginPath();
+            fireworksCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            fireworksCtx.fillStyle = p.color;
+            fireworksCtx.fill();
+          });
+
+          if (particles[0].size > 0.1) requestAnimationFrame(animate);
+        }
+        animate();
+      }
     </script>
-</body>
+  </body>
 </html>
