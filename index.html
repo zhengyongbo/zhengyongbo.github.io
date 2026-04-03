@@ -46,10 +46,6 @@
         transition: transform 0.3s ease;
       }
 
-      .main-content.keyboard-open {
-        transform: translateY(-120px);
-      }
-
       /* 钟表容器 */
       .clock-container {
         position: relative;
@@ -321,10 +317,6 @@
           width: 240px;
           height: 240px;
         }
-
-        .main-content.keyboard-open {
-          transform: translateY(-100px);
-        }
       }
     </style>
   </head>
@@ -556,7 +548,7 @@
         clockCtx.fill();
       }
 
-      // 显示虚拟键盘并上移内容
+      // 显示虚拟键盘并按需上移内容
       function showKeyboard(inputEl) {
         currentInput = inputEl;
         // 高亮当前输入框
@@ -565,14 +557,23 @@
         inputEl.classList.add("active-input");
         // 显示键盘
         numberKeyboard.style.display = "grid";
-        // 上移主内容，避免键盘遮挡输入区
-        mainContent.classList.add("keyboard-open");
+        // 动态计算：输入区底部是否被键盘遮挡
+        const inputArea = document.getElementById("inputArea");
+        const inputBottom = inputArea.getBoundingClientRect().bottom;
+        const keyboardTop = numberKeyboard.getBoundingClientRect().top;
+        const gap = 15; // 留一点间距
+        const overlap = inputBottom - keyboardTop + gap;
+        if (overlap > 0) {
+          mainContent.style.transform = "translateY(-" + overlap + "px)";
+        } else {
+          mainContent.style.transform = "";
+        }
       }
 
       // 隐藏虚拟键盘并恢复内容位置
       function hideKeyboard() {
         numberKeyboard.style.display = "none";
-        mainContent.classList.remove("keyboard-open");
+        mainContent.style.transform = "";
         hourInput.classList.remove("active-input");
         minuteInput.classList.remove("active-input");
         currentInput = null;
