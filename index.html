@@ -613,6 +613,10 @@
                   (hourInput.value.length === 1 && parseInt(hourInput.value) > 1))
               ) {
                 showKeyboard(minuteInput);
+              } else if (currentInput === minuteInput && minuteInput.value.length === 2) {
+                // 分钟输满2位，自动提交判断
+                hideKeyboard();
+                submitBtn.click();
               }
             }
           });
