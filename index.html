@@ -575,12 +575,21 @@
         showKeyboard(minuteInput);
       });
 
-      // 数字按键
+      // 数字按键 — 输满2位自动跳转下一个输入框
       document.querySelectorAll(".key-btn").forEach((btn) => {
         if (btn !== delBtn && btn !== confirmBtn) {
           btn.addEventListener("click", () => {
             if (currentInput && currentInput.value.length < 2) {
               currentInput.value += btn.textContent;
+              // 小时：输入大于1的数字直接跳分钟（因为最大12，首位>1不可能有第二位）
+              // 或者已满2位也跳
+              if (
+                currentInput === hourInput &&
+                (hourInput.value.length === 2 ||
+                  (hourInput.value.length === 1 && parseInt(hourInput.value) > 1))
+              ) {
+                showKeyboard(minuteInput);
+              }
             }
           });
         }
@@ -602,19 +611,20 @@
           numberKeyboard.style.display === "grid" &&
           !numberKeyboard.contains(e.target) &&
           e.target !== hourInput &&
-          e.target !== minuteInput
+          e.target !== minuteInput &&
+          e.target !== startBtn
         ) {
           hideKeyboard();
         }
       });
 
-      // 开始按钮
+      // 开始按钮 — 自动弹出小时输入键盘
       startBtn.addEventListener("click", () => {
         isGameStarted = true;
         hourInput.value = "";
         minuteInput.value = "";
-        hideKeyboard();
         randomTime();
+        showKeyboard(hourInput);
       });
 
       // 提交按钮
