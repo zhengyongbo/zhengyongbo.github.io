@@ -216,9 +216,30 @@
         font-size: 24px;
         color: #1e90ff;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         z-index: 10;
         position: relative;
+        display: none;
+      }
+
+      /* 查看答案小按钮 */
+      .show-answer-btn {
+        display: none;
+        margin: 0 auto 15px;
+        padding: 8px 20px;
+        border: 2px solid #1e90ff;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #1e90ff;
+        background-color: #e8f4ff;
+        cursor: pointer;
+        z-index: 10;
+        position: relative;
+      }
+
+      .show-answer-btn:active {
+        background-color: #d0e8ff;
       }
 
       .close-btn {
@@ -370,6 +391,7 @@
       <div class="modal-content">
         <canvas id="fireworksCanvas"></canvas>
         <div class="modal-text" id="modalText"></div>
+        <button class="show-answer-btn" id="showAnswerBtn">查看正确答案</button>
         <div class="correct-answer" id="correctAnswer"></div>
         <button class="close-btn" id="closeModalBtn">确定</button>
       </div>
@@ -388,6 +410,7 @@
       const modalText = document.getElementById("modalText");
       const correctAnswer = document.getElementById("correctAnswer");
       const closeModalBtn = document.getElementById("closeModalBtn");
+      const showAnswerBtn = document.getElementById("showAnswerBtn");
       const fireworksCanvas = document.getElementById("fireworksCanvas");
       const fireworksCtx = fireworksCanvas.getContext("2d");
       const delBtn = document.getElementById("delBtn");
@@ -647,7 +670,8 @@
           // 答对
           modalText.className = "modal-text correct-text";
           modalText.textContent = "恭喜你，答对了!";
-          correctAnswer.textContent = "";
+          correctAnswer.style.display = "none";
+          showAnswerBtn.style.display = "none";
           resultModal.style.display = "flex";
           drawFireworks();
           // 自动下一题
@@ -658,9 +682,13 @@
             randomTime();
           }, 2000);
         } else {
-          // 答错 — 显示正确答案
+          // 答错 — 显示查看答案按钮，隐藏答案文字
           modalText.className = "modal-text wrong-text";
           modalText.textContent = "很遗憾，再想一想吧!";
+          correctAnswer.textContent =
+            "正确答案：" + correctH + " 时 " + correctM + " 分";
+          correctAnswer.style.display = "none";
+          showAnswerBtn.style.display = "block";
           resultModal.style.display = "flex";
           hourInput.value = "";
           minuteInput.value = "";
@@ -670,7 +698,15 @@
       // 关闭模态框
       closeModalBtn.addEventListener("click", () => {
         resultModal.style.display = "none";
+        correctAnswer.style.display = "none";
         correctAnswer.textContent = "";
+        showAnswerBtn.style.display = "none";
+      });
+
+      // 查看正确答案按钮
+      showAnswerBtn.addEventListener("click", () => {
+        showAnswerBtn.style.display = "none";
+        correctAnswer.style.display = "block";
       });
 
       // 礼花动画
